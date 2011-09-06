@@ -34,7 +34,7 @@ stylesheets:
 # EXAMPLE:
 #
 helpers:
-  - helpers/**/*.js
+  - helpers/*.js
 #
 
 # spec_files

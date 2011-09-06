@@ -175,6 +175,7 @@ jasmine.Zepto.matchersClass = {};
     },
 
     toExist: function() {
+      console.log('toExist');
       return this.actual.size() > 0;
     },
 
@@ -211,6 +212,7 @@ jasmine.Zepto.matchersClass = {};
     },
 
     toContain: function(selector) {
+      console.log('toContain');
       return this.actual.find(selector).size() > 0;
     },
 
@@ -248,13 +250,16 @@ jasmine.Zepto.matchersClass = {};
     var builtInMatcher = jasmine.Matchers.prototype[methodName];
 
     jasmine.Zepto.matchersClass[methodName] = function() {
-      if (this.actual instanceof Zepto) {
+      console.log('Binding Matcher ', this.actual);
+      //if (this.actual instanceof Zepto) {
+        console.log('zepto matcher');
         var result = ZeptoMatchers[methodName].apply(this, arguments);
-        this.actual = jasmine.Zepto.elementToString(this.actual);
+        //this.actual = jasmine.Zepto.elementToString(this.actual);
         return result;
-      }
+      //}
 
       if (builtInMatcher) {
+        console.log('using built in matcher');
         return builtInMatcher.apply(this, arguments);
       }
 

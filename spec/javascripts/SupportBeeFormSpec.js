@@ -11,7 +11,7 @@
       });
       return it("should render an email field", function() {
         console.log($('#ticket_form form'));
-        return expect($('#ticket_form')).toContain('form input.email');
+        return expect($('#ticket_form form')).toContain('input.email');
       });
     });
   });

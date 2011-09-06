@@ -11,7 +11,7 @@ SupportBee.Form = {
 
   renderForm: ->
     '''
-      <form>
+      <form class="new_ticket_form">
         <fieldset>
           <label for="name">Your Name</label>
           <input class="name" maxlength="255" name="name" type="text">

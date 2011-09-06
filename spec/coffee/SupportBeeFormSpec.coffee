@@ -10,4 +10,4 @@ describe "SupportBee.Form", ->
 
     it "should render an email field", ->
       console.log $('#ticket_form form')
-      expect($('#ticket_form')).toContain 'form input.email'
+      expect($('#ticket_form form')).toContain('input.email')
