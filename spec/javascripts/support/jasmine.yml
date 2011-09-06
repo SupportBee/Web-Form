@@ -33,10 +33,9 @@ stylesheets:
 #
 # EXAMPLE:
 #
-# helpers:
-#   - helpers/**/*.js
-#
 helpers:
+  - helpers/**/*.js
+#
 
 # spec_files
 #

@@ -1,4 +1,13 @@
 describe "SupportBee.Form", ->
 
-  it "should work", ->
-    expect(true).toBe(false)
+  beforeEach ->
+    $('body').append("<div id='ticket_form'></div>")
+
+  describe "Form Rendering", ->
+
+    beforeEach ->
+      SupportBee.Form.initialize(div: 'ticket_form')
+
+    it "should render an email field", ->
+      console.log $('#ticket_form form')
+      expect($('#ticket_form')).toContain 'form input.email'
