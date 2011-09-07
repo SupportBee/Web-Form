@@ -2,30 +2,33 @@ window.SupportBee ||= {}
 
 SupportBee.Form = {
 
-
   initialize: (options) ->
-    divToAppend = options.div
+    @options = options
+
+    throw "You must provideo the company" unless @options.company?
+    @options.base_domain ||= 'supportbee.com'
+    @options.width  ||= '100%'
+    @options.height ||= '80%'
+
     form = @renderForm()
-    $("##{divToAppend}").append form
 
+    $("##{@options.div}").html form
 
-  renderForm: ->
-    '''
-      <form class="new_ticket_form">
-        <fieldset>
-          <label for="name">Your Name</label>
-          <input class="name" maxlength="255" name="name" type="text">
+    return this
 
-          <label for="email">Your Email</label>
-          <input class="email" maxlength="255" name="email" type="text">
-          
-          <label for="message">Your Message</label>
-          <input class="message" name="message" type="textarea">
+  iframeURL: ->
+    console.log 'options ', @options
+    "http://#{@options.company}.#{@options.base_domain}/web_tickets/new?embed=true&#{@prefillForm()}"
 
-          <input type="submit" value="Post Message">
-        </fieldset>
-      </form>
-    '''
+  prefillForm: ->
+    """
+      ticket[requester_name]=#{@options.name}&ticket[requester_email]=#{@options.email}&ticket[subject]=#{@options.subject}
+    """
+
+  renderForm: (options)->
+    """
+      <iframe src="#{@iframeURL()}" height="#{@options.height}" width="#{@options.width}"></iframe>
+    """
 
 
 

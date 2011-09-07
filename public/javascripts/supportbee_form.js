@@ -2,13 +2,27 @@
   window.SupportBee || (window.SupportBee = {});
   SupportBee.Form = {
     initialize: function(options) {
-      var divToAppend, form;
-      divToAppend = options.div;
+      var form, _base, _base2, _base3;
+      this.options = options;
+      if (this.options.company == null) {
+        throw "You must provideo the company";
+      }
+      (_base = this.options).base_domain || (_base.base_domain = 'supportbee.com');
+      (_base2 = this.options).width || (_base2.width = '100%');
+      (_base3 = this.options).height || (_base3.height = '80%');
       form = this.renderForm();
-      return $("#" + divToAppend).append(form);
+      $("#" + this.options.div).html(form);
+      return this;
     },
-    renderForm: function() {
-      return '<form class="new_ticket_form">\n  <fieldset>\n    <label for="name">Your Name</label>\n    <input class="name" maxlength="255" name="name" type="text">\n\n    <label for="email">Your Email</label>\n    <input class="email" maxlength="255" name="email" type="text">\n    \n    <label for="message">Your Message</label>\n    <input class="message" name="message" type="textarea">\n\n    <input type="submit" value="Post Message">\n  </fieldset>\n</form>';
+    iframeURL: function() {
+      console.log('options ', this.options);
+      return "http://" + this.options.company + "." + this.options.base_domain + "/web_tickets/new?embed=true&" + (this.prefillForm());
+    },
+    prefillForm: function() {
+      return "ticket[requester_name]=" + this.options.name + "&ticket[requester_email]=" + this.options.email + "&ticket[subject]=" + this.options.subject;
+    },
+    renderForm: function(options) {
+      return "<iframe src=\"" + (this.iframeURL()) + "\" height=\"" + this.options.height + "\" width=\"" + this.options.width + "\"></iframe>";
     }
   };
 }).call(this);
