@@ -8,11 +8,15 @@ SupportBee.Form = {
     throw "You must provideo the company" unless @options.company?
     @options.base_domain ||= 'supportbee.com'
     @options.width  ||= '100%'
-    @options.height ||= '80%'
+    @options.height ||= '800px'
+    @options.name ||= ''
+    @options.email ||= ''
+    @options.subject ||= ''
 
     form = @renderForm()
 
-    $("##{@options.div}").html form
+    #$("##{@options.div}").html form
+    document.getElementById(@options.div).innerHTML = form
 
     return this
 
